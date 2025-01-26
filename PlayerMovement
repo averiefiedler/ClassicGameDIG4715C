@@ -1,0 +1,54 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor.Build.Content;
+using UnityEngine;
+
+public class PlayerMovement : MonoBehaviour
+{
+
+    private float horizontalInput;
+    private float verticalInput;
+    private float speed;
+    private int lives;
+    private int shooting;
+
+    public GameManager gameManager;
+
+    public GameObject bullet;
+    public GameObject explosion;
+    
+    // Start is called before the first frame update
+    void Start()
+    {
+        speed = 6f;
+        lives = 1;
+        shooting = 1;
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        Movement();
+        Shooting();
+    }
+
+    //Movement
+    void Movement()
+    {
+        horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
+    }
+
+    //Shooting
+    void Shooting()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            switch (shooting)
+            {
+                case 0:
+            }
+        }
+    }
+}
