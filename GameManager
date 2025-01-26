@@ -1,0 +1,31 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GameManager : MonoBehaviour
+{
+
+    public GameObject PlayerMovement;
+    public GameObject BasicEnemy;
+
+    private bool isAlive;
+
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI gameOverText;
+    public TextMeshProUGUI restartText;
+    public TextMeshProUGUI levelText;
+
+    private int score;
+    
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
