@@ -1,0 +1,21 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+    //Unsure if code is in the correct format. Please check before implementing
+public class BasicEnemy : MonoBehaviour
+{
+    private void OnTriggerEnter2D(Collider2D whatIHit)
+    {
+        if (whatIHit.tag == "Player")
+        {
+            whatIHit.GetComponent<Player>().LoseALife();
+            Destroy(this.gameObject);
+        }
+        else if (whatIHit.tag == "Weapon")
+        {
+            GameObject.Find("GameManager").GetComponent<GameManager>().EarnScore(5);
+            Destroy(whatIHit.gameObject);
+            Destroy(this.GameObject);
+        }
+    }
+}
