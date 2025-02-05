@@ -10,13 +10,13 @@ public class BasicEnemy : MonoBehaviour
     public Vector2 targetPosition; //Formation for them to come in
     public float entrySpeed = 2f; // Speed when entering screen
     public float swoopSpeed = 4f; // Speed when swooping down
-    
-  
 
     private float nextShootTime; // Time to shoot next projectile
     private Vector2 startPosition; //Start position off-screen
     private bool isInFormation = false;
     private bool isSwooping = false;
+
+    public GameController gameController;
 
     private void Start()
     {
@@ -96,6 +96,15 @@ public class BasicEnemy : MonoBehaviour
     public void LoseALife()
     {
         Destroy(gameObject);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Projectile"))
+        {
+            Destroy(gameObject);
+            gameController.EnemyDestroyed();
+        }
     }
   
 }
