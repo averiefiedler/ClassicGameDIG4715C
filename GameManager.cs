@@ -32,8 +32,27 @@ public class GameManager : MonoBehaviour
     
     private bool isAlive;
 
- 
-    private int score;
+     //Start of Alyssa updated Game Over 11:26pm 2/4/2025
+    public int score = 0;
+    public bool isGameOver = false;
+
+    public void EarnScore(int points)
+    {
+        if (!isGameOver)
+        {
+            score += points;
+            //UI needs to be updated for score display
+            Debug.Log("Score: " + score);
+        }
+    }
+
+    public void GameOver()
+    {
+        isGameOver = true;
+        //Show game over screen
+        Debug.Log("Game Over!");
+    }
+    //End of Alyssa updated Game Over 11:26pm 2/4/2025
 
     // Start is called before the first frame update
     void Start()
