@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     public GameObject PlayerMovement;
     public GameObject BasicEnemy;
     public GameObject gameOverUI;
+    public int destroyedEnemies = 0;
+    public int enemiesToDestroy = 10;
+    public int currentLevel = 1;
 
     public void gameOver()
     {
@@ -53,6 +56,31 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Over!");
     }
     //End of Alyssa updated Game Over 11:26pm 2/4/2025
+
+    public void EnemyDestroyed()
+    {
+        destroyedEnemies++;
+        CheckLevelTransition();
+    }
+
+    void Update()
+    {
+        // Here just in case wanting to change code to have health points
+    }
+
+    void CheckLevelTransition()
+    {
+        if (destroyedEnemies >= enemiesToDestroy)
+        {
+            currentLevel = 2;
+            LoadLevel2();
+        }
+    }
+
+    void LoadLevel2()
+    {
+        Debug.Log("Transitioning to Level 2);
+    }
 
     // Start is called before the first frame update
     void Start()
