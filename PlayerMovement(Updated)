@@ -1,0 +1,54 @@
+using UnityEngine;
+
+public class PlayerMovement : MonoBehaviour
+{
+    public Rigidbody2D Player; // Reference to the player's Rigidbody2D
+    private float horizontal;
+    private float vertical;
+    public float Speed = 350f;
+
+    private Vector3 movement;
+
+    // Screen bounds for restricting movement (calculated in Start)
+    private float minY, maxY, minX, maxX;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        // Calculate screen bounds (for bottom 1/3 region and the screen width)
+        Camera mainCamera = Camera.main;
+        minY = mainCamera.ViewportToWorldPoint(new Vector3(0, 0f, 0)).y + (mainCamera.orthographicSize / 3); // Bottom third y position
+        maxY = mainCamera.ViewportToWorldPoint(new Vector3(0, 1f, 0)).y - (mainCamera.orthographicSize / 3); // Top third y position
+        minX = mainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).x; // Left edge of the screen
+        maxX = mainCamera.ViewportToWorldPoint(new Vector3(1, 0, 0)).x; // Right edge of the screen
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        // Get input from the player for movement
+        horizontal = Input.GetAxisRaw("Horizontal");
+        vertical = Input.GetAxisRaw("Vertical");
+    }
+
+    private void FixedUpdate()
+    {
+        // Create movement vector from input
+        movement = new Vector3(horizontal, vertical, 0).normalized;
+
+        // Apply movement to player
+        Player.velocity = new Vector3(movement.x * Speed, movement.y * Speed, 0) * Time.fixedDeltaTime;
+
+        // Clamp the player's position to stay within screen bounds
+        Vector3 currentPosition = transform.position;
+
+        // Restrict the player to the bottom third of the screen (Y-axis)
+        currentPosition.y = Mathf.Clamp(currentPosition.y, minY, maxY);
+
+        // Restrict the player to the screen edges (X-axis)
+        currentPosition.x = Mathf.Clamp(currentPosition.x, minX, maxX);
+
+        // Apply the new position
+        transform.position = currentPosition;
+    }
+}
