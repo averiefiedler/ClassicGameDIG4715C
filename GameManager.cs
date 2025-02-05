@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject PlayerMovement;
     public GameObject BasicEnemy;
     public GameObject gameOverUI;
-    
+
     public void gameOver()
     {
         gameOverUI.SetActive(true);
@@ -29,10 +29,10 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("LevelTwo");
         Debug.Log("LevelTwo has loaded");
     }
-    
+
     private bool isAlive;
 
-     //Start of Alyssa updated Game Over 11:26pm 2/4/2025
+    //Start of Alyssa updated Game Over 11:26pm 2/4/2025
     public int score = 0;
     public bool isGameOver = false;
 
