@@ -1,0 +1,26 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Projectiles : MonoBehaviour
+{
+    public float speed = 5f; // Speed of the projectile
+
+    private void Update()
+    {
+        // Move the projectile upwards (towards the player)
+        transform.Translate(Vector2.down * speed * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter2D(Collider2D whatIHit)
+    {
+        // If the projectile hits the player, the game ends
+        if (whatIHit.tag == "Player")
+        {
+            // You can call a GameManager method to handle the Game Over state
+            GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+            gameManager.GameOver(); // You'd need to implement GameOver method in GameManager
+            Destroy(gameObject); // Destroy the projectile
+        }
+    }
+}
