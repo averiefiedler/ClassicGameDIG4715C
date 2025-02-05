@@ -80,6 +80,7 @@ public class GameManager : MonoBehaviour
     void LoadLevel2()
     {
         Debug.Log("Transitioning to Level 2);
+        SceneManager.LoadScene("Level2");
     }
 
     // Start is called before the first frame update
