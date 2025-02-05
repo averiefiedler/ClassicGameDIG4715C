@@ -1,21 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-    //Unsure if code is in the correct format. Please check before implementing
+
 public class BasicEnemy : MonoBehaviour
 {
+    public float movementSpeed = 3f; // Speed at which the enemy moves
+    public GameObject projectilePrefab; // Reference to the projectile prefab
+    public float shootInterval = 2f; // Time between shooting projectiles
+
+    private float nextShootTime; // Time to shoot next projectile
+
+    private void Start()
+    {
+        // Schedule the first shot
+        nextShootTime = Time.time + shootInterval;
+    }
+
+    private void Update()
+    {
+        // Move the enemy downwards (or implement your own movement pattern)
+        transform.Translate(Vector2.down * movementSpeed * Time.deltaTime);
+
+        // Check if it's time to shoot
+        if (Time.time >= nextShootTime)
+        {
+            ShootProjectile();
+            nextShootTime = Time.time + shootInterval; // Reset the shoot time
+        }
+    }
+
+    private void ShootProjectile()
+    {
+        // Instantiate the projectile at the enemy's position
+        Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+    }
+
     private void OnTriggerEnter2D(Collider2D whatIHit)
     {
+        // Handle collision with the player
         if (whatIHit.tag == "Player")
         {
-            whatIHit.GetComponent<Player>().LoseALife();
-            Destroy(this.gameObject);
+            whatIHit.GetComponent<Player>().LoseALife(); // Player loses a life
+            Destroy(gameObject); // Destroy the enemy
         }
+        // Handle collision with player's weapon
         else if (whatIHit.tag == "Weapon")
         {
-            GameObject.Find("GameManager").GetComponent<GameManager>().EarnScore(5);
-            Destroy(whatIHit.gameObject);
-            Destroy(this.GameObject);
+            GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+            gameManager.EarnScore(5); // Add score
+            Destroy(whatIHit.gameObject); // Destroy the weapon
+            Destroy(gameObject); // Destroy the enemy
         }
     }
 }
