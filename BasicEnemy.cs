@@ -85,6 +85,7 @@ public class BasicEnemy : MonoBehaviour
     // Fixed OnTriggerEnter2D to handle collisions properly
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("Collided with: " + other.tag);
         // If the enemy collides with the player
         if (other.CompareTag("Player"))
         {
@@ -97,7 +98,7 @@ public class BasicEnemy : MonoBehaviour
         }
 
         // If the enemy collides with a player's projectile (Weapon)
-        else if (other.CompareTag("Weapon"))
+        else if (other.CompareTag("PlayerProjectile"))
         {
             Destroy(other.gameObject); // Destroy the player's projectile
             Destroy(gameObject); // Destroy the enemy
