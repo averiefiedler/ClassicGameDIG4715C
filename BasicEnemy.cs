@@ -104,19 +104,15 @@ public class BasicEnemy : MonoBehaviour
             Destroy(other.gameObject);
             Destroy(gameObject);
         }
-    }
-
-    public void LoseALife()
-    {
-        Destroy(gameObject); // Destroy the enemy
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
         if (other.CompareTag("PlayerProjectile"))
         {
             Destroy(other.gameObject);
             Destroy(gameObject);
         }
+    }
+
+    public void LoseALife()
+    {
+        Destroy(gameObject); // Destroy the enemy
     }
 }
