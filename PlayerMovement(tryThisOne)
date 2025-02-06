@@ -65,13 +65,14 @@ public class PlayerMovement : MonoBehaviour
     // Detect collision with a projectile
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Projectile"))
+        if (other.CompareTag("EnemyProjectile"))
         {
             // Destroy the player upon collision
             Destroy(gameObject);
+            Destroy(other.gameObject);
 
             // Trigger Game Over UI and level reload
-            GameOver();
+            GameManager.Instance.GameOver();
         }
     }
 
