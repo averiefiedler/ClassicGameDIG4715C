@@ -10,15 +10,10 @@ public class GameManager : MonoBehaviour
 
     public GameObject PlayerMovement;
     public GameObject BasicEnemy;
-    public GameObject gameOverUI;
     public int destroyedEnemies = 0;
     public int enemiesToDestroy = 10;
     public int currentLevel = 1;
 
-    public void gameOver()
-    {
-        gameOverUI.SetActive(true);
-    }
     public void mainMenu()
     {
         SceneManager.LoadScene("StartScreen");
@@ -54,10 +49,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         if (isGameOver) return;
-
-        if (gameOverUI != null)
         {
-            gameOverUI.SetActive(true);
             SceneManager.LoadScene("GameOver");
         }
         //Show game over screen
@@ -66,9 +58,8 @@ public class GameManager : MonoBehaviour
 
     public void Victory()
     {
-        if (victoryUI != null)
+        if (isVictory) return;
         {
-            victoryUI.SetActive(true);
             SceneManager.LoadScene("Victory");
         }
         Debug.Log("Victory!")
