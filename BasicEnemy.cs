@@ -7,23 +7,27 @@ public class BasicEnemy : MonoBehaviour
     public float movementSpeed = 3f; // Speed at which the enemy moves
     public GameObject projectilePrefab; // Reference to the projectile prefab
     public float shootInterval = 2f; // Time between shooting projectiles
-    public Vector2 targetPosition; //Formation for them to come in
+    public Vector2 targetPosition; // Formation for them to come in
     public float entrySpeed = 2f; // Speed when entering screen
     public float swoopSpeed = 4f; // Speed when swooping down
 
     private float nextShootTime; // Time to shoot next projectile
-    private Vector2 startPosition; //Start position off-screen
+    private Vector2 startPosition; // Start position off-screen
     private bool isInFormation = false;
     private bool isSwooping = false;
 
-    public GameController gameController;
+    private GameController gameController; // Reference to the GameController
+
+    private GameManager gameManager; // Reference to the GameManager
 
     private void Start()
     {
         startPosition = new Vector2(Random.Range(-10f, 10f), 10f);
         transform.position = startPosition;
 
-        nextShootTime = Time.time + shootInterval; //Schedule the first shot
+        nextShootTime = Time.time + shootInterval; // Schedule the first shot
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>(); // Cache GameManager reference
+        gameController = GameObject.Find("GameController").GetComponent<GameController>(); // Cache GameController reference
     }
 
     private void Update()
@@ -44,7 +48,7 @@ public class BasicEnemy : MonoBehaviour
         if (Time.time >= nextShootTime)
         {
             ShootProjectile();
-            nextShootTime = Time.time + shootInterval; //Reset shoot timer
+            nextShootTime = Time.time + shootInterval; // Reset shoot timer
         }
     }
 
@@ -60,8 +64,7 @@ public class BasicEnemy : MonoBehaviour
 
     private void MoveToFormation()
     {
-        // Only do this for more complex movement will add only if needed
-        // Just placed here as a placeholder
+        // Placeholder for more complex movement towards formation if needed in future
     }
 
     private void SwoopDown()
@@ -74,37 +77,31 @@ public class BasicEnemy : MonoBehaviour
             isSwooping = false;
         }
     }
+
     private void ShootProjectile()
     {
         Instantiate(projectilePrefab, transform.position, Quaternion.identity);
     }
+
     private void OnTriggerEnter2D(Collider2D whatIHit)
     {
-        if (whatIHit.tag == "Player")
+        if (whatIHit.CompareTag("Player"))
         {
-            whatIHit.GetComponent<PlayerMovement>();LoseALife();
-            Destroy(gameObject);
+            // Lose life for the player
+            whatIHit.GetComponent<PlayerMovement>().LoseALife(); // Fixed the typo here
+            Destroy(gameObject); // Destroy the enemy
         }
-        else if (whatIHit.tag == "Weapon")
+        else if (whatIHit.CompareTag("Weapon"))
         {
-            GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+            // Handle scoring and enemy destruction
             gameManager.EarnScore(5);
-            Destroy(whatIHit.gameObject);
-            Destroy(gameObject);
+            Destroy(whatIHit.gameObject); // Destroy the weapon projectile
+            Destroy(gameObject); // Destroy the enemy
         }
-    }
-    public void LoseALife()
-    {
-        Destroy(gameObject);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    public void LoseALife()
     {
-        if (collision.gameObject.CompareTag("Projectile"))
-        {
-            Destroy(gameObject);
-            gameController.EnemyDestroyed();
-        }
+        Destroy(gameObject); // Destroy the enemy
     }
-  
 }
