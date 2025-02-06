@@ -17,7 +17,6 @@ public class BasicEnemy : MonoBehaviour
     private bool isSwooping = false;
 
     private GameController gameController; // Reference to the GameController
-
     private GameManager gameManager; // Reference to the GameManager
 
     private void Start()
@@ -83,30 +82,31 @@ public class BasicEnemy : MonoBehaviour
         Instantiate(projectilePrefab, transform.position, Quaternion.identity);
     }
 
-    private void OnTriggerEnter2D(Collider2D whatIHit)
+    // Fixed OnTriggerEnter2D to handle collisions properly
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (whatIHit.CompareTag("Player"))
+        // If the enemy collides with the player
+        if (other.CompareTag("Player"))
         {
-            // Lose life for the player
-            whatIHit.GetComponent<PlayerMovement>().LoseALife(); // Fixed the typo here
-            Destroy(gameObject); // Destroy the enemy
-        }
-        else if (whatIHit.CompareTag("Weapon"))
-        {
-            // Handle scoring and enemy destruction
-            gameManager.EarnScore(5);
-            Destroy(whatIHit.gameObject); // Destroy the weapon projectile
+            PlayerMovement player = other.GetComponent<PlayerMovement>();
+            if (player != null) 
+            {
+                player.LoseALife(); // Call the LoseALife method of the player
+            }
             Destroy(gameObject); // Destroy the enemy
         }
 
-        if (CompareTag("PlayerProjectile"))
+        // If the enemy collides with a player's projectile (Weapon)
+        else if (other.CompareTag("Weapon"))
         {
-            Destroy(gameObject);
+            Destroy(other.gameObject); // Destroy the player's projectile
+            Destroy(gameObject); // Destroy the enemy
         }
     }
 
+    // LoseALife method for the enemy (optional here if you want specific behavior)
     public void LoseALife()
     {
-        Destroy(gameObject); // Destroy the enemy
+        Destroy(gameObject); // Destroy the enemy when it "loses a life"
     }
 }
