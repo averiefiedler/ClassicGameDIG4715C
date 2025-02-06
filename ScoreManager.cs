@@ -26,7 +26,7 @@ public class ScoreManager : MonoBehaviour
 
     public void Update()
     {
-        if(myActualScore >= nextLevelScore)
+        if (myActualScore >= nextLevelScore)
         {
             SceneManager.LoadScene("LevelTwo");
         }
@@ -35,10 +35,7 @@ public class ScoreManager : MonoBehaviour
     public void UpdateScore(int scoreToAdd)
     {
         scoreValue += scoreToAdd;
-        Debug.Log("Current score updated.", myActualScore);
-
+        // Correcting the Debug.Log
+        Debug.Log($"Current score updated: {myActualScore}");
     }
-    
-    
-
 }
