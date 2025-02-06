@@ -53,11 +53,31 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        isGameOver = true;
+        if (isGameOver) return;
+
+        if (gameOverUI != null)
+        {
+            gameOverUI.SetActive(true);
+            SceneManager.LoadScene("GameOver");
+        }
         //Show game over screen
         Debug.Log("Game Over!");
     }
+
+    public void Victory()
+    {
+        if (victoryUI != null)
+        {
+            victoryUI.SetActive(true);
+            SceneManager.LoadScene("Victory");
+        }
+        Debug.Log("Victory!")
     //End of Alyssa updated Game Over 11:26pm 2/4/2025
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("LevelOne");
+    }
 
     public void EnemyDestroyed()
     {
