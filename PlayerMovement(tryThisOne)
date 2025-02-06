@@ -68,7 +68,9 @@ public class PlayerMovement : MonoBehaviour
         if (other.CompareTag("EnemyProjectile"))
         {
             // Destroy the player upon collision
-            Destroy(gameObject);
+            other.GetComponent<PlayerMovement>().LoseALife();
+
+            Destroy(other.gameObject);
 
             // Trigger Game Over UI and level reload
             GameManager.Instance.GameOver();
@@ -93,5 +95,11 @@ public class PlayerMovement : MonoBehaviour
     {
         // Reload the current scene (start from the beginning)
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void LoseALife()
+    {
+        Destroy(gameObject);
+        GameManager.Instance.GameOver();
     }
 }
