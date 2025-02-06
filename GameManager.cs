@@ -65,14 +65,9 @@ public class GameManager : MonoBehaviour
         CheckLevelTransition();
     }
 
-    void Update()
-    {
-        // Here just in case wanting to change code to have health points
-    }
-
     void CheckLevelTransition()
     {
-        if (destroyedEnemies >= enemiesToDestroy)
+        if (destroyedEnemies >= enemiesToDestroy && currentLevel == 1)
         {
             currentLevel = 2;
             LoadLevel2();
@@ -81,14 +76,8 @@ public class GameManager : MonoBehaviour
 
     void LoadLevel2()
     {
-        Debug.Log("Transitioning to Level 2);
-        SceneManager.LoadScene("Level2");
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
+        Debug.Log("Transitioning to Level Two);
+        SceneManager.LoadScene("LevelTwo");
     }
 
     // Update is called once per frame
