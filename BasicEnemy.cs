@@ -98,6 +98,12 @@ public class BasicEnemy : MonoBehaviour
             Destroy(whatIHit.gameObject); // Destroy the weapon projectile
             Destroy(gameObject); // Destroy the enemy
         }
+
+        if (other.CompareTag("PlayerProjectile"))
+        {
+            Destroy(other.gameObject);
+            Destroy(gameObject);
+        }
     }
 
     public void LoseALife()
