@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 
+    public static GameManager Instance;
+
     public GameObject PlayerMovement;
     public GameObject BasicEnemy;
     public GameObject gameOverUI;
