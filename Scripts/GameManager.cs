@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,7 +14,10 @@ public class GameManager : MonoBehaviour
     public int destroyedEnemies = 0;
     public int enemiesToDestroy = 10;
     public int currentLevel = 1;
-
+    public static int lives = 3;
+    public bool isVictory = false;
+    public bool isCredits = false;
+    public bool isStartScreen = true;
     public void mainMenu()
     {
         SceneManager.LoadScene("StartScreen");
@@ -56,6 +60,27 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Over!");
     }
 
+    public void Credits()
+    {
+        if (isCredits) return;
+        {
+            SceneManager.LoadScene("Credits");
+
+        }
+        //Show credits screen
+        Debug.Log("Credits Scene");
+    }
+
+    public void StartScreen()
+    {
+        if (isStartScreen) return;
+        {
+            SceneManager.LoadScene("StartScreen");
+        }
+        //Show title screen
+        Debug.Log("Start Scene");
+    }
+
     public void Victory()
     {
         if (isVictory) return;
@@ -90,6 +115,13 @@ public class GameManager : MonoBehaviour
             Debug.Log("Transitioning to Level Two");
 
             SceneManager.LoadScene("LevelTwo");
+            destroyedEnemies = 0;
+            enemiesToDestroy = 1;
+
+            if (destroyedEnemies >= enemiesToDestroy && currentLevel == 2)
+            {
+                isVictory = true;
+            }
         }
 
         // Update is called once per frame

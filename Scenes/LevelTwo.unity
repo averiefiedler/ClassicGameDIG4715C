@@ -735,7 +735,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2132390313096105612, guid: 3af4d09d7a885224cb740a9391c9374b, type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: Boss
       objectReference: {fileID: 0}
     - target: {fileID: 2355370244497014537, guid: 3af4d09d7a885224cb740a9391c9374b, type: 3}
       propertyPath: shootInterval

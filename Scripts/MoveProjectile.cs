@@ -25,7 +25,7 @@ public class MoveProjectile : MonoBehaviour
     {
         if (col.gameObject.name == "Enemy")
         {
-            DestroyObject(this.gameObject);
+            Object.Destroy(this.gameObject);
         }
     }
 }

@@ -153,10 +153,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerMovement: {fileID: 0}
   BasicEnemy: {fileID: 0}
-  gameOverUI: {fileID: 0}
   destroyedEnemies: 0
   enemiesToDestroy: 10
   currentLevel: 1
+  isVictory: 0
+  isCredits: 0
+  isStartScreen: 1
   score: 0
   isGameOver: 0
 --- !u!4 &130138091
@@ -668,7 +670,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -201}
+  m_AnchoredPosition: {x: 0, y: -169}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1831696054
@@ -775,6 +777,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1850112241}
   - component: {fileID: 1850112240}
+  - component: {fileID: 1850112242}
   m_Layer: 0
   m_Name: PressToStart
   m_TagString: Untagged
@@ -823,7 +826,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 66c73fc5e6d36af428e16592214e9511, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cfd31a3ae385fd148955616788acf075, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -844,11 +847,23 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.4, y: -1.47, z: 0}
-  m_LocalScale: {x: 4.4719, y: 4.4719, z: 4.4719}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.69, y: 0.69, z: 0.69}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1850112242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850112239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8fb15f1792153444a6af6cdd1e2b2e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2016781379
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,10 +15,12 @@ public class PlayerMovement : MonoBehaviour
     private float minY, maxY, minX, maxX;
 
     public GameObject gameOver; // Reference to the Game Over UI panel
+    public int lives; // Reference to lives int in GameManager
 
     // Start is called before the first frame update
     void Start()
     {
+
         Player.freezeRotation = true;
 
         // Get the camera's main properties
@@ -62,6 +65,12 @@ public class PlayerMovement : MonoBehaviour
         transform.position = currentPosition;
     }
 
+    public void LoseALife()
+    {
+        Destroy(gameObject);
+        lives--;
+    }
+
     // Detect collision with a projectile
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -71,34 +80,16 @@ public class PlayerMovement : MonoBehaviour
             other.GetComponent<PlayerMovement>().LoseALife();
 
             Destroy(other.gameObject);
+            LoseALife();
 
-            // Trigger Game Over UI and level reload
-            SceneManager.LoadScene("GameOver");
+            if (lives == 0)
+            {
+                // Trigger Game Over UI and level reload
+                SceneManager.LoadScene("GameOver");
+            }
+
         }
     }
 
   
-}
-
-// Reload the current level
-public void ReloadLevel()
-{
-    // Reload the current scene (start from the beginning)
-    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-}
-
-void OnDestroy()
-{
-    TriggerGameOver();
-}
-
- void TriggerGameOver()
-{
-    SceneManager.LoadScene("GameOver");
-}
-
- void LoseALife()
-{
-    Destroy(gameObject);
-    GameManager.Instance.GameOver();
 }

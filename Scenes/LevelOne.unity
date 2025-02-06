@@ -170,11 +170,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8730381667006268103, guid: 7d89e5fb91fc6e145aa55cf323bef3dd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.67
+      value: -12.36
       objectReference: {fileID: 0}
     - target: {fileID: 8730381667006268103, guid: 7d89e5fb91fc6e145aa55cf323bef3dd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.61
+      value: -5.47
       objectReference: {fileID: 0}
     - target: {fileID: 8730381667006268103, guid: 7d89e5fb91fc6e145aa55cf323bef3dd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -373,10 +373,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerMovement: {fileID: 36864203}
   BasicEnemy: {fileID: 154329570}
-  gameOverUI: {fileID: 0}
   destroyedEnemies: 0
   enemiesToDestroy: 10
   currentLevel: 1
+  isVictory: 0
   score: 0
   isGameOver: 0
 --- !u!1001 &413523734
@@ -1441,11 +1441,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8131555167184035600, guid: 2f02d121d24464542b2da24da6931867, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.19
+      value: -11.62
       objectReference: {fileID: 0}
     - target: {fileID: 8131555167184035600, guid: 2f02d121d24464542b2da24da6931867, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.5
+      value: -5.44
       objectReference: {fileID: 0}
     - target: {fileID: 8131555167184035600, guid: 2f02d121d24464542b2da24da6931867, type: 3}
       propertyPath: m_LocalPosition.z
