@@ -10,6 +10,7 @@ public class BasicEnemy : MonoBehaviour
     public Vector2 targetPosition; // Formation for them to come in
     public float entrySpeed = 2f; // Speed when entering screen
     public float swoopSpeed = 4f; // Speed when swooping down
+    public int scoreValue = 10;
 
     private float nextShootTime; // Time to shoot next projectile
     private Vector2 startPosition; // Start position off-screen
@@ -82,7 +83,7 @@ public class BasicEnemy : MonoBehaviour
     }
 
     // Fixed OnTriggerEnter2D to handle collisions properly
-    private void OnTriggerEnter2D(Collider2D other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
         // If the enemy collides with the player
         if (other.CompareTag("Player"))
@@ -100,6 +101,14 @@ public class BasicEnemy : MonoBehaviour
         {
             Destroy(other.gameObject); // Destroy the player's projectile
             Destroy(gameObject); // Destroy the enemy
+
+            ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+            if (scoreManager != null)
+            {
+                scoreManager.UpdateScore(scoreValue);
+            }
+
+   
         }
     }
 
