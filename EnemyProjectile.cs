@@ -28,4 +28,20 @@ public class EnemyProjectile : MonoBehaviour
             col.gameObject.SetActive(false);
         }
     }
+
+    private void Update()
+    {
+        transform.Translate(Vector3.down * speed * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Destroy(other.gameObject);
+            Destroy(gameObject);
+
+            GameManager.Instance.GameOver();
+        }
+    }
 }
