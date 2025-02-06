@@ -17,7 +17,9 @@ public class EnemyProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        projectile.velocity = new Vector2(0, -1) * moveSpeed;  
+        projectile.velocity = new Vector2(0, -1) * moveSpeed;
+
+        transform.Translate(Vector3.down * moveSpeed * Time.deltaTime);
     }
 
     //hit detection
@@ -29,10 +31,6 @@ public class EnemyProjectile : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        transform.Translate(Vector3.down * speed * Time.deltaTime);
-    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {

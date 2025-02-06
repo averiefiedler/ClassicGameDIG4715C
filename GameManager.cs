@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,7 +14,10 @@ public class GameManager : MonoBehaviour
     public int destroyedEnemies = 0;
     public int enemiesToDestroy = 10;
     public int currentLevel = 1;
-
+    public static int lives = 3;
+    public bool isVictory = false;
+    public bool isCredits = false;
+    public bool isStartScreen = true;
     public void mainMenu()
     {
         SceneManager.LoadScene("StartScreen");
@@ -56,48 +60,78 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Over!");
     }
 
+    public void Credits()
+    {
+        if (isCredits) return;
+        {
+            SceneManager.LoadScene("Credits");
+
+        }
+        //Show credits screen
+        Debug.Log("Credits Scene");
+    }
+
+    public void StartScreen()
+    {
+        if (isStartScreen) return;
+        {
+            SceneManager.LoadScene("StartScreen");
+        }
+        //Show title screen
+        Debug.Log("Start Scene");
+    }
+
     public void Victory()
     {
         if (isVictory) return;
         {
             SceneManager.LoadScene("Victory");
         }
-        Debug.Log("Victory!")
-    //End of Alyssa updated Game Over 11:26pm 2/4/2025
+        Debug.Log("Victory!");
+        //End of Alyssa updated Game Over 11:26pm 2/4/2025
 
-    public void RestartGame()
-    {
-        SceneManager.LoadScene("LevelOne");
-    }
-
-    public void EnemyDestroyed()
-    {
-        destroyedEnemies++;
-        CheckLevelTransition();
-    }
-
-    void CheckLevelTransition()
-    {
-        if (destroyedEnemies >= enemiesToDestroy && currentLevel == 1)
+        void RestartGame()
         {
-            currentLevel = 2;
-            LoadLevel2();
+            SceneManager.LoadScene("LevelOne");
         }
-    }
 
-    void LoadLevel2()
-    {
-        Debug.Log("Transitioning to Level Two);
-        SceneManager.LoadScene("LevelTwo");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown("escape"))
+        void EnemyDestroyed()
         {
-            Application.Quit();
-            Debug.Log("Game has quit.");
+            destroyedEnemies++;
+            CheckLevelTransition();
+        }
+
+        void CheckLevelTransition()
+        {
+            if (destroyedEnemies >= enemiesToDestroy && currentLevel == 1)
+            {
+                currentLevel = 2;
+                LoadLevel2();
+            }
+        }
+
+        void LoadLevel2()
+        {
+            Debug.Log("Transitioning to Level Two");
+
+            SceneManager.LoadScene("LevelTwo");
+            destroyedEnemies = 0;
+            enemiesToDestroy = 1;
+
+            if (destroyedEnemies >= enemiesToDestroy && currentLevel == 2)
+            {
+                isVictory = true;
+            }
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (Input.GetKeyDown("escape"))
+            {
+                Application.Quit();
+                Debug.Log("Game has quit.");
+            }
         }
     }
 }

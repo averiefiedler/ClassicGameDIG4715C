@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerProjectile : MonoBehaviour
+public class MoveProjectile : MonoBehaviour
+
 {
-    public Rigidbody2D projectile;
+    public Rigidbody2D projectile; //ref to rigidbody2d
 
     public float moveSpeed = 5.0f;
 
@@ -18,25 +19,13 @@ public class PlayerProjectile : MonoBehaviour
     void Update()
     {
         projectile.velocity = new Vector2(0, 1) * moveSpeed;
-        transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
     }
 
-    // hit detection
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.name == "Enemy")
         {
-            col.gameObject.SetActive(false);
-        }
-    }
-
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            Destroy(other.gameObject);
-            Destroy(gameObject);
+            Object.Destroy(this.gameObject);
         }
     }
 }

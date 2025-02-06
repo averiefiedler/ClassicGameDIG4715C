@@ -16,7 +16,6 @@ public class BasicEnemy : MonoBehaviour
     private bool isInFormation = false;
     private bool isSwooping = false;
 
-    private GameController gameController; // Reference to the GameController
     private GameManager gameManager; // Reference to the GameManager
 
     private void Start()
@@ -26,7 +25,7 @@ public class BasicEnemy : MonoBehaviour
 
         nextShootTime = Time.time + shootInterval; // Schedule the first shot
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>(); // Cache GameManager reference
-        gameController = GameObject.Find("GameController").GetComponent<GameController>(); // Cache GameController reference
+        
     }
 
     private void Update()
@@ -85,12 +84,11 @@ public class BasicEnemy : MonoBehaviour
     // Fixed OnTriggerEnter2D to handle collisions properly
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Collided with: " + other.tag);
         // If the enemy collides with the player
         if (other.CompareTag("Player"))
         {
             PlayerMovement player = other.GetComponent<PlayerMovement>();
-            if (player != null) 
+            if (player != null)
             {
                 player.LoseALife(); // Call the LoseALife method of the player
             }
