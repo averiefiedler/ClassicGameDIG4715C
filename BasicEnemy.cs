@@ -99,14 +99,8 @@ public class BasicEnemy : MonoBehaviour
             Destroy(gameObject); // Destroy the enemy
         }
 
-        if (other.CompareTag("PlayerProjectile"))
+        if (CompareTag("PlayerProjectile"))
         {
-            Destroy(other.gameObject);
-            Destroy(gameObject);
-        }
-        if (other.CompareTag("PlayerProjectile"))
-        {
-            Destroy(other.gameObject);
             Destroy(gameObject);
         }
     }
